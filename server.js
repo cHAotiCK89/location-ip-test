@@ -1,28 +1,26 @@
 const express = require('express');
 const app = express();
+
 const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 const cors = require('cors');
-
-app.use(bodyParser.json()); 
-
-// CORS設定を有効化
 app.use(cors());
 
 app.post('/', (req, res) => {
 
-  // デバイス情報オブジェクトを受信 
   const deviceInfo = req.body;
 
-  // 情報をコンソールに出力
-  console.log(`location: ${deviceInfo.latitude}, ${deviceInfo.longitude}`);
+  console.log(`[location] : ${deviceInfo.latitude}, ${deviceInfo.longitude}`);  
 
-  // IPアドレス
   const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  console.log(`IPアドレス: ${ipAddress}`);
   
-  res.send('デバイス情報を受信しました');
+  console.log(`[ipaddress] : ${ipAddress}`);
+
+  res.send('Device information received.');
+
 });
 
 app.listen(3000, () => {
-  console.log('server run!');
+  console.log('Server is running!');
 });
