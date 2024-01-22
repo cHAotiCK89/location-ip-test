@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get("/log-gps", (req, res) => {
-  // GPS情報の取得は同じ
+  const { lat, lng } = req.query; 
+  console.log(lat, lng); 
   res.send("Logged GPS");
 });
 
